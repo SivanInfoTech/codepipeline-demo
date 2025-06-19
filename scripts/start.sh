@@ -4,7 +4,7 @@
 #echo "==> Starting ApplicationStart hook" | sudo tee -a /tmp/deploy.log
 
 # Stop Apache if running
-sudo systemctl stop httpd || echo "httpd not running"
+sudo systemctl stop httpd || echo "httpd is running"
 
 # Clear old files (optional)
 sudo rm -rf /var/www/html/demo-app1/*
