@@ -10,7 +10,7 @@ sudo systemctl stop httpd || echo "httpd not running"
 sudo rm -rf /var/www/html/demo-app1/*
 
 # Copy updated files
-sudo cp -R /home/ec2-user/demo-app/* /var/www/html/demo-app1/
+sudo cp -r /home/ec2-user/demo-app/* /var/www/html/demo-app1/
 
 # Start Apache
 sudo systemctl start httpd
