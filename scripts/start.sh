@@ -1,17 +1,23 @@
 #!/bin/bash
-#set -e
+set -e
 
-#echo "==> Starting ApplicationStart hook" | sudo tee -a /tmp/deploy.log
+echo "=== [INFO] ApplicationStart Hook Started ===" | tee -a /tmp/deploy.log
 
 # Stop Apache if running
-sudo systemctl stop httpd || echo "httpd is running"
+sudo systemctl stop httpd || echo "httpd not running" | tee -a /tmp/deploy.log
 
-# Clear old files (optional)
-sudo rm -rf /var/www/html/demo-app1/*
+# Ensure target directory exists
+sudo mkdir -p /var/www/html
 
-# Copy updated files
-sudo cp -r /home/ec2-user/demo-app/* /var/www/html/demo-app1/
+# Copy files
+sudo cp -r /home/ec2-user/demo-app/* /var/www/html/ | tee -a /tmp/deploy.log
+
+# Set permissions
+sudo chmod -R 755 /var/www/html
+sudo chown -R apache:apache /var/www/html || sudo chown -R ec2-user:ec2-user /var/www/html
 
 # Start Apache
 sudo systemctl start httpd
 sudo systemctl enable httpd
+
+echo "=== [INFO] ApplicationStart Hook Completed ===" | tee -a /tmp/deploy.log
