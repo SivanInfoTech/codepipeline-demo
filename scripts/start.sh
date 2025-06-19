@@ -10,11 +10,11 @@ sudo systemctl stop httpd || echo "httpd not running" | tee -a /tmp/deploy.log
 sudo mkdir -p /var/www/html
 
 # Copy files
-sudo cp -r /home/ec2-user/demo-app/* /var/www/html/ | tee -a /tmp/deploy.log
+sudo cp -r /home/ec2-user/demo-app/* /var/www/html/demo-app1 | tee -a /tmp/deploy.log
 
 # Set permissions
-sudo chmod -R 755 /var/www/html
-sudo chown -R apache:apache /var/www/html || sudo chown -R ec2-user:ec2-user /var/www/html
+sudo chmod -R 755 /var/www/html/demo-app1
+sudo chown -R apache:apache /var/www/html/demo-app1 || sudo chown -R ec2-user:ec2-user /var/www/html/demo-app1
 
 # Start Apache
 sudo systemctl start httpd
